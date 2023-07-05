@@ -5,6 +5,7 @@ import { supabase } from "../../lib/supabase";
 import { makeRedirectUri, startAsync } from "expo-auth-session";
 import { DancerAlias } from "./DancerAlias";
 import { GridLines } from "./GridLines";
+import { ThreeD } from "./ThreeD";
 export function Performance({ session, performanceOpen, setPerformanceOpen }) {
    const [formations, setFormations] = useState([]);
    const [dancers, setDancers] = useState([]);
@@ -65,13 +66,14 @@ export function Performance({ session, performanceOpen, setPerformanceOpen }) {
                <Text className="font-semibold text-xl w-1/2 text-center">{danceName}</Text>
                <Text className="font-semibold text-xl w-1/4"></Text>
             </View>
+
             {!cloudSettings?.stageDimensions?.width ? (
                <View className="flex flex-row items-center justify-center h-full w-full">
                   <Text className="text-5xl font-semibold">FORMI</Text>
                </View>
             ) : (
                <View className=" flex-1 flex flex-col justify-between h-full  ">
-                  <View
+                  {/* <View
                      ref={stageContainer}
                      onLayout={onLayout}
                      className=" w-full  flex-col justify-center  lg:px-5 px-1 flex-grow "
@@ -104,8 +106,8 @@ export function Performance({ session, performanceOpen, setPerformanceOpen }) {
                               })}
                         </View>
                      </View>
-                  </View>
-
+                  </View> */}
+                  <ThreeD cloudSettings={cloudSettings}></ThreeD>
                   {/* timeline container */}
                   <View className=" mb-5  w-full h-24   max-h-24 ">
                      <ScrollView

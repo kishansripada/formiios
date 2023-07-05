@@ -9,6 +9,7 @@ import { View } from "react-native";
 import { Session } from "@supabase/supabase-js";
 import { Buffer } from "buffer";
 global.Buffer = Buffer;
+import * as Linking from "expo-linking";
 
 import { Text } from "react-native";
 // global.Buffer = require("buffer").Buffer;
@@ -25,6 +26,22 @@ export default function App() {
          setSession(session);
       });
    }, []);
+
+   useEffect(() => {
+      Linking.addEventListener("url", handleDeepLink);
+
+      // Clean up the event listener when the component is unmounted
+      return () => {
+         Linking.removeEventListener("url", handleDeepLink);
+      };
+   }, []);
+
+   const handleDeepLink = (event) => {
+      // Handle the incoming deep link URL
+      console.log(event.url);
+      // You can parse the URL and navigate to the correct screen
+      // using your navigation library (e.g. react-navigation)
+   };
 
    return (
       <View className="h-full bg-white ">

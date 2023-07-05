@@ -12,11 +12,11 @@ export function GridLines({ cloudSettings, squareSize }) {
                <View
                   style={{
                      width:
-                        i === (cloudSettings?.stageDimensions?.width || 0) || i === 0 || i % 2 === 0
+                        i === (cloudSettings?.stageDimensions?.width || 0) || i === 0
                            ? 0
                            : (i - (cloudSettings?.stageDimensions?.width || 0) / 2) % cloudSettings?.gridSubdivisions === 0
-                           ? 1.3 * (squareSize / 10)
-                           : 0.5 * (squareSize / 10),
+                           ? 1.5 * (squareSize / 10)
+                           : 0,
                   }}
                   key={i}
                   className="h-full w-[2px] bg-neutral-200"
@@ -29,11 +29,11 @@ export function GridLines({ cloudSettings, squareSize }) {
                   <View
                      style={{
                         height:
-                           i === (cloudSettings?.stageDimensions?.height || 0) || i === 0 || i % 2 === 0
+                           i === (cloudSettings?.stageDimensions?.height || 0) || i === 0
                               ? 0
                               : (i - (cloudSettings?.stageDimensions?.height || 0) / 2) % cloudSettings?.gridSubdivisions === 0
-                              ? 1.3 * (squareSize / 10)
-                              : 0.5 * (squareSize / 10),
+                              ? 1.5 * (squareSize / 10)
+                              : 0,
                      }}
                      key={i}
                      className="w-full  bg-neutral-200"

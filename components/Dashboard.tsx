@@ -67,7 +67,11 @@ export default function Dashboard({ session, setPerformanceOpen }) {
                               }}
                               key={dance.id}
                            >
-                              <View style={{ width: "100%" }} className="flex flex-col mt-5 text-gray-700 h-12  relative cursor-pointer w-full">
+                              <View
+                                 key={dance.id}
+                                 style={{ width: "100%" }}
+                                 className="flex flex-col mt-5 text-gray-700 h-12  relative cursor-pointer w-full"
+                              >
                                  <View style={{ width: "100%" }} className="flex flex-row px-3 lg:px-5 items-center justify-between w-full">
                                     <Text className="mt-1 font-semibold">{dance.name}</Text>
                                     <Text className=" text-xs text-gray-400">{timeSince(dance.last_edited)} ago</Text>
