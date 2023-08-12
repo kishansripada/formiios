@@ -17,6 +17,7 @@ import { Text } from "react-native";
 export default function App() {
    const [session, setSession] = useState<Session | null>(null);
    const [performanceOpen, setPerformanceOpen] = useState<string | null>(null);
+
    useEffect(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
          setSession(session);
@@ -27,24 +28,12 @@ export default function App() {
       });
    }, []);
 
-   useEffect(() => {
-      Linking.addEventListener("url", handleDeepLink);
-
-      // Clean up the event listener when the component is unmounted
-      return () => {
-         Linking.removeEventListener("url", handleDeepLink);
-      };
-   }, []);
-
-   const handleDeepLink = (event) => {
-      // Handle the incoming deep link URL
-      console.log(event.url);
-      // You can parse the URL and navigate to the correct screen
-      // using your navigation library (e.g. react-navigation)
-   };
-
    return (
-      <View className="h-full bg-white ">
+      <View
+         style={{
+            height: "100%",
+         }}
+      >
          {session ? (
             <>
                {performanceOpen ? (

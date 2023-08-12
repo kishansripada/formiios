@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Alert, StyleSheet, View, Button, TextInput, Text } from "react-native";
 import { supabase, supabaseUrl } from "../lib/supabase";
 import { makeRedirectUri, startAsync } from "expo-auth-session";
+import * as Linking from "expo-linking";
 
 export default function Auth() {
    const [loading, setLoading] = useState(false);
@@ -9,10 +10,21 @@ export default function Auth() {
    async function signInWithEmail() {
       setLoading(true);
 
-      const redirectUrl = makeRedirectUri({
-         scheme: "formi",
-         path: "/auth/callback",
-      });
+      // const redirectUrl = makeRedirectUri({
+      //    scheme: "formi",
+      //    path: "/auth/callback",
+      // });
+
+      const redirectUrl = "formi://auth/callback";
+
+      // let redirectURL = Linking.createURL("/auth/callback");
+      // console.log(redirectURL);
+      // const { data, error } = await supabase.auth.signInWithOtp({
+      //    email: "kishansripada@gmail.com",
+      //    options: {
+      //       emailRedirectTo: redirectURL,
+      //    },
+      // });
 
       const authResponse = await startAsync({
          authUrl: `${supabaseUrl}/auth/v1/authorize?provider=google&redirect_to=${redirectUrl}`,
@@ -31,30 +43,39 @@ export default function Auth() {
    }
 
    return (
-      <View className=" my-auto  ">
-         <View className="w-[200px] mx-auto  mb-5  ">
-            <>
-               <Text className="text-5xl font-bold z-10 relative">FORMI</Text>
-               <View className="bg-pink-600 relative h-3 opacity-40 top-[-15px] mr-auto w-[100%]"></View>
-            </>
+      <View style={styles.container}>
+         <View style={styles.innerContainer}>
+            <Text style={styles.headerText}>FORMI</Text>
          </View>
 
-         <Button className="text-black " color={"#000000"} title="Sign in with Google" disabled={loading} onPress={() => signInWithEmail()}></Button>
+         <Button title="Sign in with Google" color="#000000" disabled={loading} onPress={signInWithEmail} />
       </View>
    );
 }
 
 const styles = StyleSheet.create({
    container: {
-      marginTop: 40,
-      padding: 12,
+      flex: 1,
+      justifyContent: "center",
    },
-   verticallySpaced: {
-      paddingTop: 4,
-      paddingBottom: 4,
-      alignSelf: "stretch",
+   innerContainer: {
+      width: 200,
+      alignSelf: "center",
+      marginBottom: 20,
+      alignItems: "center",
    },
-   mt20: {
-      marginTop: 20,
+   headerText: {
+      fontSize: 40,
+      fontWeight: "bold",
+      zIndex: 10,
+      position: "relative",
+   },
+   underline: {
+      backgroundColor: "#F06292",
+      height: 3,
+      width: "100%",
+      opacity: 0.4,
+      position: "relative",
+      top: -15,
    },
 });
